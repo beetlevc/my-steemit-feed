@@ -1,0 +1,22 @@
+﻿.articles {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.SettingTitle {
+    margin-bottom: 1rem;
+}
+
+.icon-button__svg1 {
+    display: block;
+    fill: transparent;
+    transition: all 0.3s ease-in-out;
+    width: 36px;
+    height: 36px; 
+}
+/* @media only screen and (min-width: 47.5em) {
+    .icon-button__svg1 {
+        width: 42px;
+        height: 42px; 
+    } 
+} */
