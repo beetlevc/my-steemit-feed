@@ -1,8 +1,8 @@
 {
-  "name": "vue-test2",
+  "name": "my-steemit-feed",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "beetlevc beetlevc <beetlevc1@hotmail.com>",
+  "author": "beetlevc beetlevc <beetlevc@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
