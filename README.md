@@ -1,4 +1,4 @@
-# vue-test2
+# my-steemit-feed
 
 > A Vue.js project
 
