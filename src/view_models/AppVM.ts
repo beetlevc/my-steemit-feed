@@ -2,7 +2,8 @@
 // import * as steem from 'steem'
 import { LocalStorageKey, PostsPerPage } from '../constants'
 import { getFeedFirstEntryAsync, getDiscussionsByFeedAsync } from '../steemWrappers'
-import { FilterMode, Settings, SettingsEditor } from './Settings'
+import { FilterMode, Settings } from '../models/Settings'
+import { SettingsEditorVM } from './SettingsEditorVM'
 //import * as debounce from 'lodash.debounce'
 const debounce = require("lodash.debounce")
 
@@ -18,7 +19,7 @@ export default class AppVM {
     isSettingsPanelVisible: boolean = false;
     posts: PostVM[] = [];
     settings: Settings = new Settings();
-    settingsEditor: SettingsEditor = new SettingsEditor();
+    settingsEditor: SettingsEditorVM = new SettingsEditorVM();
     isLoading: number = 0;
     isAllLoaded: boolean = false;
     loadMoreCount: number = 0;

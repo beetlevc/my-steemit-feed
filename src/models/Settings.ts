@@ -19,11 +19,3 @@ export enum FilterMode {
     Whitelist = "Whitelist",
     Blacklist = "Blacklist",
 }
-
-export class SettingsEditor {
-    blog: string = "";
-    filterMode: FilterMode = FilterMode.Blacklist;
-    whitelist: string = "";
-    blacklist: string = "";
-    showReblogged: boolean = false;    
-}
