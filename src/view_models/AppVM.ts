@@ -14,6 +14,13 @@ function topPosition(domElt: any): number {
     return domElt.offsetTop + topPosition(domElt.offsetParent);
 }
 
+function parseStringArray(value: any, defaultValue: string[]): string[] {
+    if (value && Array.isArray(value) && value.length)
+        return value;
+    else
+        return defaultValue;
+}
+
 export default class AppVM {
     blogmode: boolean = false;
     isSettingsPanelVisible: boolean = false;
@@ -159,8 +166,8 @@ export default class AppVM {
             this.settings.blog = settings.blog;
             this.settings.showReblogged = settings.showReblogged;
             this.settings.filterMode = settings.filterMode;
-            this.settings.whitelist = settings.whitelist;
-            this.settings.blacklist = settings.blacklist;
+            this.settings.whitelist = parseStringArray(settings.whitelist, []);
+            this.settings.blacklist = parseStringArray(settings.blacklist, []);
         } catch {
             console.error("Could not load settings.");
         }

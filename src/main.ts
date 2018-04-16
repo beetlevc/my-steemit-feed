@@ -45,6 +45,9 @@ const appVMP = new Vue({
     tt: function (key: string|string[], options?: object): string {
       return counterpart(key, options);
     },
+    formatDateTime: function (value?: Date): string {
+      return value ? value.toLocaleString(CurrentLocale) : "";
+    }, 
     toggleBlogmode: function (event: any) {
       // `this` inside methods point to the Vue instance
       // `event` is the native DOM event

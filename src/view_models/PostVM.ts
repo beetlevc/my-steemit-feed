@@ -42,10 +42,6 @@ export default class PostVM {
         return `${this.postUrl}#comments`;
     }
 
-    get createdString(): string {
-        return this.created.toLocaleString(CurrentLocale);
-    }
-
     get reputationLog10(): number {
         return repLog10(this.reputation);
     }
