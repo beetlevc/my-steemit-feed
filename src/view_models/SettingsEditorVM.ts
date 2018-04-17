@@ -1,4 +1,4 @@
-﻿import { FilterMode } from '../models/Settings'
+﻿import { FilterMode, PostViewer } from '../models/Settings'
 
 export class SettingsEditorVM {
     blog: string = "";
@@ -6,4 +6,5 @@ export class SettingsEditorVM {
     whitelist: string = "";
     blacklist: string = "";
     showReblogged: boolean = false;    
+    postViewer: PostViewer = PostViewer.Steemit;
 }

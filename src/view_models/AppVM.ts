@@ -2,7 +2,7 @@
 // import * as steem from 'steem'
 import { LocalStorageKey, PostsPerPage } from '../constants'
 import { getFeedFirstEntryAsync, getDiscussionsByFeedAsync } from '../steemWrappers'
-import { FilterMode, Settings } from '../models/Settings'
+import { FilterMode, Settings, PostViewer } from '../models/Settings'
 import { SettingsEditorVM } from './SettingsEditorVM'
 //import * as debounce from 'lodash.debounce'
 const debounce = require("lodash.debounce")
@@ -127,9 +127,10 @@ export default class AppVM {
 
         this.settingsEditor.blog = this.settings.blog;
         this.settingsEditor.showReblogged = this.settings.showReblogged;
-        this.settingsEditor.filterMode = FilterMode[this.settings.filterMode];
+        this.settingsEditor.filterMode = this.settings.filterMode;
         this.settingsEditor.whitelist = this.settings.whitelist.join(", ");
         this.settingsEditor.blacklist = this.settings.blacklist.join(", ");
+        this.settingsEditor.postViewer = this.settings.postViewer;
     }
 
     hideSettingsPanel(): void {
@@ -141,6 +142,7 @@ export default class AppVM {
         const filterMode = this.settingsEditor.filterMode !== undefined ? this.settingsEditor.filterMode : FilterMode.Blacklist;
         const whitelist = this.settingsEditor.whitelist ? this.settingsEditor.whitelist.split(",").map(x => x.trim()) : []
         const blacklist = this.settingsEditor.blacklist ? this.settingsEditor.blacklist.split(",").map(x => x.trim()) : []
+        const postViewer = this.settingsEditor.postViewer !== undefined ? this.settingsEditor.postViewer : PostViewer.Steemit;
 
         const isBlogChanged = this.settings.blog !== blog;
         this.settings.blog = blog;
@@ -148,6 +150,7 @@ export default class AppVM {
         this.settings.filterMode = filterMode;
         this.settings.whitelist = whitelist;
         this.settings.blacklist = blacklist;
+        this.settings.postViewer = postViewer;
         this.saveSettings();
         if (isBlogChanged) {
             this.reloadAll(); // только запускаем, но не ждем завершения
@@ -165,9 +168,10 @@ export default class AppVM {
             const settings: Settings = settingsString ? JSON.parse(settingsString) : new Settings();
             this.settings.blog = settings.blog;
             this.settings.showReblogged = settings.showReblogged;
-            this.settings.filterMode = settings.filterMode;
+            this.settings.filterMode = settings.filterMode ? settings.filterMode : FilterMode.Blacklist;
             this.settings.whitelist = parseStringArray(settings.whitelist, []);
             this.settings.blacklist = parseStringArray(settings.blacklist, []);
+            this.settings.postViewer = settings.postViewer ? settings.postViewer : PostViewer.Steemit;
         } catch {
             console.error("Could not load settings.");
         }

@@ -17,6 +17,7 @@ import Vue from 'vue'
 import AppVM from './view_models/AppVM'
 import PostVM from './view_models/PostVM'
 import * as counterpart from 'counterpart'
+import { PostViewer } from './models/Settings'
 // import * as $ from "jquery";
 Vue.config.productionTip = false;
 
@@ -48,6 +49,10 @@ const appVMP = new Vue({
     formatDateTime: function (value?: Date): string {
       return value ? value.toLocaleString(CurrentLocale) : "";
     }, 
+    getCompleteUrl: function (path: string): string {
+      const baseUrl = appVM.settings.postViewer === PostViewer.Busy ? "https://busy.org" : "https://steemit.com";
+      return baseUrl.concat(path);
+    },
     toggleBlogmode: function (event: any) {
       // `this` inside methods point to the Vue instance
       // `event` is the native DOM event
