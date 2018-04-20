@@ -4,6 +4,7 @@ import ExtractContent from '../utils/ExtractContent'
 import { formatDecimal, parsePayoutAmount, repLog10 } from '../utils/ParsersAndFormatters'
 import proxifyImageUrl from '../utils/ProxifyUrl'
 import * as steem from 'steem'
+import VoteVM from './VoteVM';
 
 // function calcReputationLog10(reputation: number): number {
 //     let multi = (reputation < 0)?-9:9;
@@ -13,6 +14,10 @@ import * as steem from 'steem'
 //     rep += 25;
 //     return Math.floor(rep);
 // }
+
+function parseSteemDate(value: string): Date {
+    return new Date(value.concat("Z"));
+}
 
 export default class PostVM {
     isVisible: boolean = true;
@@ -97,6 +102,7 @@ export default class PostVM {
         public readonly curator_payout_value: string,
         public readonly json_metadata: string,
         public readonly reblogged_by: string[],
+        public readonly vote?: VoteVM,
     ) {
         const content = ExtractContent(this.body, this.json_metadata);
         this.imageUrl = content.image_link;
@@ -116,7 +122,12 @@ export default class PostVM {
         this.description = content.desc;
     }
 
-    static create(post: steem.Post): PostVM {
+    static create(post: steem.Post, blog: string): PostVM {
+        const vote = post.active_votes.find((element, index, array) => element.voter === blog);
+        const voteVM = 
+            vote ?
+            new VoteVM(parseSteemDate(vote.time), vote.percent / 10000) :
+            undefined;
         return new PostVM(
             post.author, 
             parseInt(post.author_reputation),
@@ -126,7 +137,7 @@ export default class PostVM {
             // imageUrl,
             post.category,
             post.body,
-            new Date(post.created.concat("Z")),
+            parseSteemDate(post.created),
             post.children,
             post.net_votes,
             post.pending_payout_value,
@@ -135,6 +146,7 @@ export default class PostVM {
             post.curator_payout_value,
             post.json_metadata,
             post.reblogged_by,
+            voteVM,
         );
     }
 }

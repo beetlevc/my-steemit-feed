@@ -21,6 +21,35 @@
     <style type="text/css">
         [v-cloak] {display: none}
     </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter48529352 = new Ya.Metrika({
+                    id:48529352,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48529352" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
     <div id="content" v-cloak>
@@ -164,7 +193,7 @@
                                                 <div class="articles__summary-footer">
                                                     <span class="Voting">
                                                         <span class="Voting__inner">
-                                                            <span class="Voting__button Voting__button-up">
+                                                            <span class="Voting__button Voting__button-up" v-bind:class="{ 'Voting__button--upvoted': post.vote, }" v-bind:title="post.vote ? formatDateTime(post.vote.time) + '\n' + (post.vote.percent * 100).toFixed(2) + '%' : ''">
                                                                 <a target="_blank" v-bind:href="getCompleteUrl(post.commentsUrl)">
                                                                     <span class="Icon chevron-up-circle" style="display: inline-block; width: 1.12rem; height: 1.12rem;">
                                                                         <svg enable-background="new 0 0 33 33" version="1.1" viewBox="0 0 33 33" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Chevron_Up_Circle"><circle cx="16" cy="16" r="15" stroke="#121313" fill="none"></circle><path d="M16.699,11.293c-0.384-0.38-1.044-0.381-1.429,0l-6.999,6.899c-0.394,0.391-0.394,1.024,0,1.414 c0.395,0.391,1.034,0.391,1.429,0l6.285-6.195l6.285,6.196c0.394,0.391,1.034,0.391,1.429,0c0.394-0.391,0.394-1.024,0-1.414 L16.699,11.293z" fill="#121313"></path></g></svg>

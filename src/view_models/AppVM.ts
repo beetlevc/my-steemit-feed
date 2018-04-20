@@ -54,6 +54,7 @@ export default class AppVM {
 
     async loadMore(): Promise<void> {
         if (this.loadMoreCount !== 0) return;
+        if (!this.settings.blog) return;
         // console.log("Load older posts");
         const minVisiblePosts = this.visiblePostCount + PostsPerPage;
         this.isError = false;
@@ -84,7 +85,7 @@ export default class AppVM {
                 this.isAllLoaded = posts.length !== PostsPerPage;
                 if (sExclude)
                     posts = posts.slice(1);
-                const postVMs = posts.map(x => PostVM.create(x));
+                const postVMs = posts.map(x => PostVM.create(x, this.settings.blog));
                 this.filterPosts(postVMs);
                 this.posts.push(...postVMs);
             }

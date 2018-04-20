@@ -15,10 +15,27 @@
        parent_permlink?: string;
     }
 
+    interface Vote {
+        percent: number, //10000
+        reputation: string, //"74378317044"
+        rshares: number, //443494199
+        time: string, //"2018-04-16T08:14:51"
+        voter: string, //"armia"
+        weight: number, //724            
+    }
+
+    interface AccountVote {            
+        authorperm: string, //"arcange/steemsql-com-how-to-create-a-steem-analytic-report-with-microsoft-excel"
+        percent: number, //10000
+        rshares: string, //"356519005414"
+        time: string, //"2017-08-31T04:28:39"
+        weight: number, //602147
+    }
+
     interface Post {
         abs_rshares: string; //"101775123872"
         active: string; //"2018-04-03T09:28:33"
-        active_votes: any[];
+        active_votes: Vote[];
         allow_curation_rewards: boolean;
         allow_replies: boolean;
         allow_votes: boolean;
@@ -214,7 +231,7 @@
 //       "params": ["nameOrId", "signers"]
 //     },
         getActiveVotesAsync(author: string, permlink: string): Promise<any>;
-        getAccountVotesAsync(voter: string): Promise<any>;
+        getAccountVotesAsync(voter: string): Promise<AccountVote[]>;
         getContentAsync(author: string, permlink: string): Promise<any>;
         getContentRepliesAsync(author: string, permlink: string): Promise<any>;
 //     {
